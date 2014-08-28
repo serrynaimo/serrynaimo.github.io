@@ -58,7 +58,7 @@
         }
         else if(state === skyway.DATA_TRANSFER_STATE.DOWNLOAD_COMPLETED) {
             var img = document.createElement('img');
-            img.src = 'data:image/jpeg;base64,'+Base64Encode(transferInfo.data);
+            img.src = 'data:image/jpeg;base64,' + Base64Encode(transferInfo.data);
             $capture.appendChild(img);
 
             $status.innerText = "Ready to capture";
@@ -95,7 +95,7 @@
         $status.innerText = "Capturing...";
     }
 
-    function Base64Encode = function (input) {
+    function Base64Encode(input) {
         var output = "";
         var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
         var i = 0;
