@@ -66,19 +66,19 @@ body {
 }
 
 #preview, #photo {
-    width: 300px;
-    margin: -100px -150px;
+    width: 600px;
+    margin: -200px -300px;
     left: 50%;
     position: absolute;
-    top: 50%;
+    top: 40%;
 }
 
 @media screen and (orientation:landscape) {
     #preview, #photo {
-        width: 600px;
-        margin: -200px -300px;
+        width: 300px;
+        margin: -100px -150px;
         left: 50%;
         position: absolute;
-        top: 40%;
+        top: 50%;
     }
 }
