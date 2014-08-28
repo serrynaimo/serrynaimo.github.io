@@ -52,11 +52,32 @@ body {
 }
 
 #captures {
-    padding-right: 10px;
+    position: absolute;
+    right: 10px;
+    top: 0;
+    bottom: 0;
     white-space: nowrap;
 }
 
 #captures img {
     height: 230px;
     margin: 10px 0 10px 10px;
+}
+
+#preview, #photo {
+    width: 300px;
+    margin: -100px -150px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+}
+
+@media screen and (orientation:landscape) {
+    #preview, #photo {
+        width: 600px;
+        margin: -200px -300px;
+        left: 50%;
+        position: absolute;
+        top: 40%;
+    }
 }

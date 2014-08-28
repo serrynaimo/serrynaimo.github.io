@@ -31,7 +31,7 @@
     <section id="status">
         Idle
     </section>
-    <video id="video" style="width: 300px; margin: -100px -150px; left: 50%; position: absolute; top: 50%;" muted autoplay></video>
+    <video id="preview" style="width: 300px; margin: -100px -150px; left: 50%; position: absolute; top: 50%;" muted autoplay></video>
     <canvas id="photo" style="display: none; width: 300px; margin: -100px -150px; left: 50%; position: absolute; top: 50%;" width="1024" height="768"></canvas>
 
     <script src="http://cdn.temasys.com.sg/skyway/skywayjs/0.4.1/skyway.complete.min.js"></script>
@@ -40,7 +40,7 @@
 
     var skyway = new Skyway(),
         $status = document.getElementById('status'),
-        $video = document.getElementById('video'),
+        $video = document.getElementById('preview'),
         $photo = document.getElementById('photo');
 
     skyway.on('incomingMessage', function (message, peerId, peerInfo, isSelf) {
@@ -50,13 +50,11 @@
             var ctx = $photo.getContext("2d");
             ctx.drawImage($video, 0, 0, 1024, 768);
 
-            document.body.style.transition = 'background .8s ease-out';
             document.body.style.background = '#ffffff';
             $video.style.display = 'none';
             $photo.style.display = 'block';
 
             setTimeout(function() {
-                document.body.style.transition = 'none';
                 document.body.style.background = '#000000';
                 $photo.style.display = 'none';
                 $video.style.display = 'block';
