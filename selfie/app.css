@@ -40,7 +40,7 @@ body {
     line-height: 30px;
 }
 
-#captures {
+#capturesCont {
     background: #333;
     position: absolute;
     overflow: hidden;
@@ -49,7 +49,11 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
+}
+
+#captures {
     padding-right: 10px;
+    white-space: nowrap;
 }
 
 #captures img {
