@@ -39,16 +39,16 @@
     <script type="text/javascript">
 
     function getOrientation() {
-        if(orientation === 'portrait') {
+        if(orientation === undefined || orientation > 0) {
             return {
-                width: 768,
-                height: 1024
+                width: 1024,
+                height: 768
             }
         }
         else {
             return {
-                width: 1024,
-                height: 768
+                width: 768,
+                height: 1024
             }
         }
     }
