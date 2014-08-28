@@ -36,7 +36,7 @@
     <script type="text/javascript">
 
     var skyway = new Skyway(),
-        $status = document.getElementById('status'),
+        $status = document.getElementById('status');
 
     skyway.on('incomingMessage', function (message, peerId, peerInfo, isSelf) {
         if(message.content === '/capture') {
@@ -65,7 +65,7 @@
 
     skyway.on('readyStateChange', function(state) {
         if(state === 2) {
-            $status.innerText = "Connected";
+            $status.innerText = "Waiting for Remote...";
         }
     });
 
