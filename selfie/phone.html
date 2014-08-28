@@ -38,6 +38,21 @@
     <script src="canvas2blob.js"></script>
     <script type="text/javascript">
 
+    function getOrientation() {
+        if(orientation === 'landscape') {
+            return {
+                width: 1024,
+                height: 768
+            }
+        }
+        else {
+            return {
+                width: 768,
+                height: 1024
+            }
+        }
+    }
+
     var skyway = new Skyway(),
         $status = document.getElementById('status'),
         $video = document.getElementById('preview'),
@@ -47,8 +62,13 @@
         if(message.content === '/capture') {
             $status.innerText = "Capturing...";
 
+            var or = getOrientation();
+
+            $photo.width = or.width;
+            $photo.height = or.height;
+
             var ctx = $photo.getContext("2d");
-            ctx.drawImage($video, 0, 0, 1024, 768);
+            ctx.drawImage($video, 0, 0, or.width, or.height);
 
             document.body.style.background = '#ffffff';
             $video.style.display = 'none';
@@ -109,36 +129,6 @@
 
     skyway.init('774b477f-dc20-4374-ba13-3eda09414c28');
     skyway.joinRoom({video: true});
-
-    // sample
-    function capture() {
-
-    }
-
-    // Helpers
-    function b64toBlob(b64Data, contentType, sliceSize) {
-        contentType = contentType || '';
-        sliceSize = sliceSize || 512;
-
-        var byteCharacters = atob(b64Data);
-        var byteArrays = [];
-
-        for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-            var slice = byteCharacters.slice(offset, offset + sliceSize);
-
-            var byteNumbers = new Array(slice.length);
-            for (var i = 0; i < slice.length; i++) {
-                byteNumbers[i] = slice.charCodeAt(i);
-            }
-
-            var byteArray = new Uint8Array(byteNumbers);
-
-            byteArrays.push(byteArray);
-        }
-
-        var blob = new Blob(byteArrays, {type: contentType});
-        return blob;
-    }
 
     </script>
 
