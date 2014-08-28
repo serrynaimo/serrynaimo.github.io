@@ -40,13 +40,15 @@
     <script src="http://cdn.temasys.com.sg/skyway/skywayjs/0.4.1/skyway.complete.min.js"></script>
     <script type="text/javascript">
 
+    var phonePeerId;
+
     var skyway = new Skyway(),
         $captures = document.getElementById('captures'),
         $video = document.getElementById('phone'),
         $status = document.getElementById('status');
 
     skyway.on('incomingStream', function (peerId, stream, isSelf) {
-        if(!isSelf) {
+        if(peerId === phonePeerId) {
             attachMediaStream($video, stream);
             $status.innerText = "Ready to capture";
         }
@@ -75,14 +77,15 @@
         }
     });
 
-    skyway.on('peerJoined', function (peerId, stream, isSelf) {
-        if(!isSelf) {
+    skyway.on('peerJoined', function (peerId, peerInfo, isSelf) {
+        if(peerInfo.userData.type === 'phone') {
+            phonePeerId = peerId;
             $status.innerText = "Phone joined. Loading preview...";
         }
     });
 
-    skyway.on('peerLeft', function (peerId, stream, isSelf) {
-        if(!isSelf) {
+    skyway.on('peerLeft', function (peerId, peerInfo, isSelf) {
+        if(peerId === phonePeerId) {
             $status.innerText = "Waiting for phone...";
         }
     });
