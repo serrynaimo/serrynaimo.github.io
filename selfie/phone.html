@@ -45,7 +45,7 @@
             var img = capture();
 
             skyway.sendBlobData(img, {
-                size: img.length,
+                size: img.size,
                 name: (new Date()).toString()
             }, peerId);
         }
