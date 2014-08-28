@@ -57,11 +57,17 @@
             $status.innerText = "Receiving image...";
         }
         else if(state === skyway.DATA_TRANSFER_STATE.DOWNLOAD_COMPLETED) {
-            var img = document.createElement('img');
-            img.src = 'data:image/jpeg;base64,' + Base64Encode(transferInfo.data);
-            $capture.appendChild(img);
+            var reader = new FileReader();
 
-            $status.innerText = "Ready to capture";
+            reader.onloadend = function() {
+                var image = document.createElement('img');
+                image.src = "data:image/jpeg;base64," + Base64Encode(reader.result);
+                $capture.appendChild(img);
+
+                $status.innerText = "Ready to capture";
+            };
+
+            reader.readAsBinaryString(blob);
         }
         else if(error) {
             $status.innerText = error.message;
@@ -95,6 +101,7 @@
         $status.innerText = "Capturing...";
     }
 
+    // Helpers
     function Base64Encode(input) {
         var output = "";
         var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
