@@ -60,9 +60,9 @@
             var reader = new FileReader();
 
             reader.onloadend = function() {
-                var image = document.createElement('img');
-                image.src = "data:image/jpeg;base64," + Base64Encode(reader.result);
-                $capture.appendChild(img);
+                var img = document.createElement('img');
+                img.src = "data:image/jpeg;base64," + Base64Encode(reader.result);
+                $captures.appendChild(img);
 
                 $status.innerText = "Ready to capture";
             };
