@@ -52,10 +52,10 @@
     });
 
     skyway.on('dataTransferState', function (state, transferId, peerId, transferInfo, error) {
-        if(state === skyway.DATA_TRANSFER_STATE.DOWNLOAD_COMPLETED) {
-            $status.innerText = "Ready";
+        if(state === skyway.DATA_TRANSFER_STATE.UPLOAD_COMPLETED) {
+            $status.innerText = "Ready to capture";
         }
-        else if(state === skyway.DATA_TRANSFER_STATE.DOWNLOAD_STARTED) {
+        else if(state === skyway.DATA_TRANSFER_STATE.UPLOAD_STARTED) {
             $status.innerText = "Sending image...";
         }
         else if(error) {
@@ -71,7 +71,7 @@
 
     skyway.on('peerJoined', function (peerId, stream, isSelf) {
         if(!isSelf) {
-            $status.innerText = "Remote connected";
+            $status.innerText = "Ready to capture";
         }
     });
 

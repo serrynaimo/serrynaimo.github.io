@@ -56,7 +56,7 @@
             skyway.respondBlobRequest(peerId, true);
             $status.innerText = "Receiving image...";
         }
-        else if(state === skyway.DATA_TRANSFER_STATE.UPLOAD_COMPLETED) {
+        else if(state === skyway.DATA_TRANSFER_STATE.DOWNLOAD_COMPLETED) {
             var img = document.createElement('img');
             img.src = transferInfo.data;
             $capture.appendChild(img);
