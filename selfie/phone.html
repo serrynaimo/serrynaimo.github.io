@@ -38,6 +38,13 @@
     <script src="canvas2blob.js"></script>
     <script type="text/javascript">
 
+    var peers = [];
+
+    var skyway = new Skyway(),
+        $status = document.getElementById('status'),
+        $video = document.getElementById('preview'),
+        $photo = document.getElementById('photo');
+
     function getOrientation() {
         if(orientation === undefined || Math.abs(orientation) === 90) {
             return {
@@ -53,10 +60,14 @@
         }
     }
 
-    var skyway = new Skyway(),
-        $status = document.getElementById('status'),
-        $video = document.getElementById('preview'),
-        $photo = document.getElementById('photo');
+    function updatePeerInfo() {
+        if(peers.length) {
+            $status.innerText = "Ready to capture (" + peers.length + " remote" + (peers.length > 1 ? "s connected)" : " connected)");
+        }
+        else {
+            $status.innerText = "Waiting for remote...";
+        }
+    }
 
     skyway.on('incomingMessage', function (message, peerId, peerInfo, isSelf) {
         if(message.content === '/capture') {
@@ -111,19 +122,27 @@
 
     skyway.on('readyStateChange', function(state) {
         if(state === 2) {
-            $status.innerText = "Waiting for remote...";
+            updatePeerInfo();
         }
     });
 
     skyway.on('peerJoined', function (peerId, stream, isSelf) {
         if(!isSelf) {
-            $status.innerText = "Ready to capture";
+            peers.push(peerId);
+            updatePeerInfo();
         }
     });
 
     skyway.on('peerLeft', function (peerId, stream, isSelf) {
         if(!isSelf) {
-            $status.innerText = "Waiting for remote...";
+            var npeers = [];
+            for(peer in peers) {
+                if(peers[peer] !== peerId) {
+                    npeers.push(peers[peer]);
+                }
+            }
+            peers = npeers;
+            updatePeerInfo();
         }
     });
 
