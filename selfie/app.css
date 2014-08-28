@@ -1,0 +1,56 @@
+body {
+    background: #000;
+}
+
+#status {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: #fff;
+    background: #222;
+}
+
+#video {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    right: 0;
+    bottom: 250px;
+    text-align: center;
+}
+
+#video video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#video button {
+    position: absolute;
+    margin: 0 -100px;
+    left: 50%;
+    bottom: 20px;
+    width: 200px;
+    line-height: 30px;
+}
+
+#captures {
+    background: #333;
+    position: absolute;
+    overflow: hidden;
+    overflow-x: auto;
+    height: 250px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#captures img {
+    height:;
+}

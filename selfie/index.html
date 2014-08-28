@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="http://www.facebook.com/2008/fbml"
+    itemscope itemtype="http://schema.org/WebPage">
+<head>
+    <meta charset="utf-16">
+    <title>Selfie Remote</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="">
+    <meta property="og:description" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <meta property="og:site_name" content="">
+
+    <meta name="git:tag" content="@@tag">
+    <meta name="git:rev" content="@@rev">
+    <meta name="git:date" content="@@date">
+
+    <meta name="viewport" content="width=600">
+
+    <meta name="apple-mobile-web-app-capable" content="no">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+    <section id="status">Idle</section>
+    <section id="video">
+        <video id="phone" muted autoplay></video>
+        <button onclick="capture();">Capture</button>
+    </section>
+    <section id="captures">
+    </section>
+
+    <script src="http://cdn.temasys.com.sg/skyway/skywayjs/0.4.1/skyway.complete.min.js"></script>
+    <script type="text/javascript">
+
+    var skyway = new Skyway(),
+        $captures = document.getElementById('captures'),
+        $video = document.getElementById('phone'),
+        $status = document.getElementById('status');
+
+    skyway.on('incomingStream', function (peerId, stream, isSelf) {
+        if(!isSelf) {
+            attachMediaStream($video, stream);
+            $status.innerText = "Ready";
+        }
+    });
+
+    skyway.on('dataTransferState', function (state, transferId, peerId, transferInfo, error) {
+        if(state === skyway.DATA_TRANSFER_STATE.UPLOAD_REQUEST) {
+            skyway.respondBlobRequest(peerId, true);
+            $status.innerText = "Receiving...";
+        }
+        else if(state === skyway.DATA_TRANSFER_STATE.UPLOAD_COMPLETED) {
+            var img = document.createElement('img');
+            img.src = transferInfo.data;
+            $capture.appendChild(img);
+
+            $status.innerText = "Ready";
+        }
+        else if(error) {
+            $status.innerText = error.message;
+        }
+    });
+
+    skyway.on('readyStateChange', function(state) {
+        if(state === 2) {
+            $status.innerText = "Connected";
+        }
+    });
+
+    skyway.init('774b477f-dc20-4374-ba13-3eda09414c28');
+    skyway.joinRoom();
+
+
+    function capture() {
+        skyway.sendP2PMessage('/capture');
+        $status.innerText = "Capturing...";
+    }
+
+    </script>
+
+</body>
+</html>
