@@ -46,16 +46,23 @@
         $photo = document.getElementById('photo');
 
     function getOrientation() {
-        if(orientation === undefined || Math.abs(orientation) === 90) {
+        try {
+            if(Math.abs(orientation) === 90) {
+                return {
+                    width: 1024,
+                    height: 768
+                }
+            }
+            else {
+                return {
+                    width: 768,
+                    height: 1024
+                }
+            }
+        } catch(e) {
             return {
                 width: 1024,
                 height: 768
-            }
-        }
-        else {
-            return {
-                width: 768,
-                height: 1024
             }
         }
     }
