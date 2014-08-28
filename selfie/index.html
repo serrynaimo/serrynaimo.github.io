@@ -58,7 +58,7 @@
         }
         else if(state === skyway.DATA_TRANSFER_STATE.DOWNLOAD_COMPLETED) {
             var img = document.createElement('img');
-            img.src = transferInfo.data;
+            img.src = 'data:image/jpeg;base64,'+Base64.encode(transferInfo.data);
             $capture.appendChild(img);
 
             $status.innerText = "Ready to capture";
