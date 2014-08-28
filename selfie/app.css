@@ -75,8 +75,8 @@ body {
 
 @media screen and (orientation:landscape) {
     #preview, #photo {
-        width: 300px;
-        margin: -100px -150px;
+        width: 330px;
+        margin: -110px -165px;
         left: 50%;
         position: absolute;
         top: 50%;
