@@ -28,10 +28,10 @@
     <link rel="stylesheet" href="app.css">
 </head>
 <body>
-    <section id="status" style="top: 10%;">
+    <section id="status">
         Idle
     </section>
-    <video id="video" style="display: none;" muted autoplay></video>
+    <video id="video" style="display: none; width: 300px; margin: -100px -150px; left: 50%; position: absolute; top: 50%;" muted autoplay></video>
     <canvas id="photo" style="width: 300px; margin: -100px -150px; left: 50%; position: absolute; top: 50%;" width="1024" height="768"></canvas>
 
     <script src="http://cdn.temasys.com.sg/skyway/skywayjs/0.4.1/skyway.complete.min.js"></script>
@@ -49,6 +49,14 @@
 
             var ctx = $photo.getContext("2d");
             ctx.drawImage($video, 0, 0, 1024, 768);
+
+            $video.style.display = 'none';
+            $photo.style.display = 'block';
+
+            setTimeout(function() {
+                $photo.style.display = 'none';
+                $video.style.display = 'block';
+            }, 2000);
 
             $photo.toBlob(function(blob) {
                 skyway.sendBlobData(blob, {
