@@ -49,8 +49,10 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
+    padding-right: 10px;
 }
 
 #captures img {
-    height:;
+    height: 230px;
+    margin: 10px 0 10px 10px;
 }
