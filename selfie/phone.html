@@ -50,10 +50,14 @@
             var ctx = $photo.getContext("2d");
             ctx.drawImage($video, 0, 0, 1024, 768);
 
+            document.body.style.transition = 'background .8s ease-out';
+            document.body.style.background = '#ffffff';
             $video.style.display = 'none';
             $photo.style.display = 'block';
 
             setTimeout(function() {
+                document.body.style.transition = 'none';
+                document.body.style.background = '#000000';
                 $photo.style.display = 'none';
                 $video.style.display = 'block';
             }, 2000);
