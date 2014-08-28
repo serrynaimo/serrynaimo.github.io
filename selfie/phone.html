@@ -56,7 +56,7 @@
             $status.innerText = "Ready";
         }
         else if(state === skyway.DATA_TRANSFER_STATE.DOWNLOAD_STARTED) {
-            $status.innerText = "Sending...";
+            $status.innerText = "Sending image...";
         }
         else if(error) {
             $status.innerText = error.message;
@@ -65,7 +65,19 @@
 
     skyway.on('readyStateChange', function(state) {
         if(state === 2) {
-            $status.innerText = "Waiting for Remote...";
+            $status.innerText = "Waiting for remote...";
+        }
+    });
+
+    skyway.on('peerJoined', function (peerId, stream, isSelf) {
+        if(!isSelf) {
+            $status.innerText = "Remote connected";
+        }
+    });
+
+    skyway.on('peerLeft', function (peerId, stream, isSelf) {
+        if(!isSelf) {
+            $status.innerText = "Waiting for remote...";
         }
     });
 
