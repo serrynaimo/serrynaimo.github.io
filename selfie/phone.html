@@ -40,7 +40,7 @@
 
     function getOrientation() {
         alert(orientation);
-        if(orientation === undefined || orientation > 0) {
+        if(orientation === undefined || Math.abs(orientation) === 90) {
             return {
                 width: 1024,
                 height: 768
