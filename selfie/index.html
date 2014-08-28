@@ -67,7 +67,7 @@
                 $status.innerText = "Ready to capture";
             };
 
-            reader.readAsBinaryString(blob);
+            reader.readAsBinaryString(transferInfo.data);
         }
         else if(error) {
             $status.innerText = error.message;
