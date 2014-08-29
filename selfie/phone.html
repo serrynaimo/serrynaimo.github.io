@@ -119,6 +119,7 @@
     skyway.on('dataTransferState', function (state, transferId, peerId, transferInfo, error) {
         if(state === skyway.DATA_TRANSFER_STATE.UPLOAD_COMPLETED) {
             updatePeerInfo();
+            skyway.sendP2PMessage('/ready');
         }
         else if(state === skyway.DATA_TRANSFER_STATE.UPLOAD_STARTED) {
             $status.innerText = "Sending image...";
