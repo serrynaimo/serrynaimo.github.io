@@ -34,6 +34,7 @@
     <video id="preview" muted autoplay></video>
     <canvas id="photo" style="display: none;" width="1024" height="768"></canvas>
 
+    <script type="text/javascript" src="http://l2.io/ip.js?var=myip"></script>
     <script src="skyway.complete.min.js"></script>
     <script src="canvas2blob.js"></script>
     <script type="text/javascript">
@@ -153,7 +154,10 @@
         }
     });
 
-    skyway.init('774b477f-dc20-4374-ba13-3eda09414c28');
+    skyway.init({
+        apiKey: '774b477f-dc20-4374-ba13-3eda09414c28',
+        defaultRoom: myip
+    });
     skyway.setUserData({
         type: 'phone'
     });
