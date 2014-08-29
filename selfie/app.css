@@ -40,12 +40,12 @@ body {
     bottom: 20px;
     width: 200px;
     line-height: 34px;
-    border-radius: 8px;
+    border-radius: 4px;
     background: #00AAA4;
     box-shadow: 1px 2px 1px #006662;
     border: 0;
     font-weight: bold;
-    font-size: 1.1em;
+    font-size: 1em;
     color: #fff;
     outline: none;
 }
