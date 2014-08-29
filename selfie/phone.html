@@ -77,6 +77,30 @@
         }
     }
 
+    function dataURL2Blob(dataURL) {
+        var BASE64_MARKER = ';base64,';
+        if (dataURL.indexOf(BASE64_MARKER) == -1) {
+          var parts = dataURL.split(',');
+          var contentType = parts[0].split(':')[1];
+          var raw = decodeURIComponent(parts[1]);
+
+          return new Blob([raw], {type: contentType});
+        }
+
+        var parts = dataURL.split(BASE64_MARKER);
+        var contentType = parts[0].split(':')[1];
+        var raw = window.atob(parts[1]);
+        var rawLength = raw.length;
+
+        var uInt8Array = new Uint8Array(rawLength);
+
+        for (var i = 0; i < rawLength; ++i) {
+          uInt8Array[i] = raw.charCodeAt(i);
+        }
+
+        return new Blob([uInt8Array], {type: contentType});
+    }
+
     skyway.on('incomingMessage', function (message, peerId, peerInfo, isSelf) {
         if(message.content === '/capture') {
             $status.innerText = "Capturing...";
@@ -99,7 +123,7 @@
                 $video.style.display = 'block';
             }, 2000);
 
-            var blob = skyway._base64ToBlob($photo.toDataURL('image/jpeg', 0.8));
+            var blob = dataURL2Blob($photo.toDataURL('image/jpeg', 0.8));
 
             skyway.sendBlobData(blob, {
                 size: blob.size,
@@ -163,6 +187,8 @@
         type: 'phone'
     });
     skyway.joinRoom({video: true});
+
+
 
     </script>
 
