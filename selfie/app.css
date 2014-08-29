@@ -55,6 +55,10 @@ body {
     box-shadow: none;
 }
 
+#video button:disabled {
+    background: #888;
+}
+
 #capturesCont {
     background: #333;
     position: absolute;
