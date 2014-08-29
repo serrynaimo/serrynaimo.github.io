@@ -163,9 +163,9 @@
     skyway.on('peerJoined', function (peerId, peerInfo, isSelf) {
         if(!isSelf) {
             if(peerInfo.userData.type === 'phone' && peerInfo.userData.joined < joinTime) {
-                $status.innerText = "There is already a camera on this network";
-                $video.src = '';
                 skyway.leaveRoom();
+                $video.src = '';
+                $status.innerText = "There is already a camera on this network";
             }
             else {
                 peers.push(peerId);
