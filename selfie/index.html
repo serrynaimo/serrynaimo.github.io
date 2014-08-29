@@ -34,7 +34,7 @@
         <button onclick="capture();">Capture</button>
     </section>
     <section id="capturesCont">
-        <div id="captures"></div>
+        <div id="captures"><span></span></div>
     </section>
 
     <script type="text/javascript" src="http://l2.io/ip.js?var=myip"></script>
@@ -63,7 +63,8 @@
         else if(state === skyway.DATA_TRANSFER_STATE.DOWNLOAD_COMPLETED) {
             var img = document.createElement('img');
             img.src = URL.createObjectURL(transferInfo.data)
-            $captures.appendChild(img);
+
+            $captures.insertBefore(img, $captures.children[0]);
 
             $status.innerText = "Ready to capture";
         }

@@ -53,16 +53,16 @@ body {
 }
 
 #captures {
-    position: absolute;
-    right: 10px;
-    top: 0;
-    bottom: 0;
     white-space: nowrap;
 }
 
 #captures img {
     height: 230px;
     margin: 10px 0 10px 10px;
+}
+
+#captures img:last-child {
+    margin-right: 10px;
 }
 
 #preview, #photo {
