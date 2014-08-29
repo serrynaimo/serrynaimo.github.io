@@ -38,7 +38,8 @@
     <script type="text/javascript" src="skyway.complete.min.js"></script>
     <script type="text/javascript">
 
-    var peers = [];
+    var peers = [],
+        joinTime = (new Date()).getTime();
 
     var skyway = new Skyway(),
         $status = document.getElementById('status'),
@@ -160,9 +161,16 @@
     });
 
     skyway.on('peerJoined', function (peerId, peerInfo, isSelf) {
-        if(!isSelf && peerInfo.userData.type !== 'phone') {
-            peers.push(peerId);
-            updatePeerInfo();
+        if(!isSelf) {
+            if(peerInfo.userData.type === 'phone' && peerInfo.userData.joined < joinTime) {
+                $status.innerText = "There is already a camera on this network";
+                $video.src = '';
+                skyway.leaveRoom();
+            }
+            else {
+                peers.push(peerId);
+                updatePeerInfo();
+            }
         }
     });
 
@@ -184,7 +192,8 @@
         defaultRoom: myip
     });
     skyway.setUserData({
-        type: 'phone'
+        type: 'phone',
+        joined: joinTime
     });
     skyway.joinRoom({video: true});
 
