@@ -1,5 +1,6 @@
 body {
     background: #000;
+    font-family: Helvetica, Arial, sans-serif;
 }
 
 #status {
@@ -11,15 +12,16 @@ body {
     line-height: 30px;
     text-align: center;
     color: #fff;
-    background: #222;
+    background: #444;
+    border-bottom: 1px solid #333;
 }
 
 #video {
     position: absolute;
-    top: 30px;
+    top: 31px;
     left: 0;
     right: 0;
-    bottom: 250px;
+    bottom: 251px;
     text-align: center;
 }
 
@@ -37,8 +39,20 @@ body {
     left: 50%;
     bottom: 20px;
     width: 200px;
-    line-height: 30px;
+    line-height: 34px;
     border-radius: 8px;
+    background: #00AAA4;
+    box-shadow: 1px 2px 1px #006662;
+    border: 0;
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #fff;
+    outline: none;
+}
+
+#video button:active {
+    bottom: 19px;
+    box-shadow: none;
 }
 
 #capturesCont {
@@ -46,6 +60,7 @@ body {
     position: absolute;
     overflow: hidden;
     overflow-x: auto;
+    border-top: 1px solid #444;
     height: 250px;
     bottom: 0;
     left: 0;
@@ -54,6 +69,16 @@ body {
 
 #captures {
     white-space: nowrap;
+}
+
+#captures span:first-child:after {
+    content: "Your pictures will appear here.";
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 115px auto;
+    color: #222;
+    text-shadow: 1px 1px 0 #444;
 }
 
 #captures img {
