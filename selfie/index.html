@@ -74,6 +74,7 @@
         }
         else if(state === skyway.DATA_TRANSFER_STATE.DOWNLOAD_COMPLETED) {
             var img = document.createElement('img');
+            img.title = transferInfo.name;
             img.src = URL.createObjectURL(transferInfo.data)
 
             $captures.insertBefore(img, $captures.children[0]);
