@@ -183,7 +183,10 @@
                 }
             }
             peers = npeers;
-            updatePeerInfo();
+
+            if(skyway._in_room) {
+                updatePeerInfo();
+            }
         }
     });
 
