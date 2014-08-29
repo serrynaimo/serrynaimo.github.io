@@ -133,6 +133,7 @@
 
     skyway.on('mediaAccessSuccess', function (stream) {
         attachMediaStream($video, stream);
+        updatePeerInfo();
     });
 
     skyway.on('mediaAccessError', function () {
@@ -154,7 +155,7 @@
 
     skyway.on('readyStateChange', function(state) {
         if(state === 2) {
-            updatePeerInfo();
+            $status.innerText = "Please share access to your camera.";
         }
     });
 
