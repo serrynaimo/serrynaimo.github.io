@@ -61,7 +61,7 @@
         if(peerId === phonePeerId && message.content === '/ready') {
             $status.innerText = "Ready to capture";
             $btn.disabled = false;
-        } else if (message.content === '/capture') {
+        } else if (!isSelf && message.content === '/capture') {
             $status.innerText = "Somebody else took a photo. Hold on...";
             $btn.disabled = true;
         }
