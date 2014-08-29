@@ -159,14 +159,14 @@
         }
     });
 
-    skyway.on('peerJoined', function (peerId, stream, isSelf) {
-        if(!isSelf) {
+    skyway.on('peerJoined', function (peerId, peerInfo, isSelf) {
+        if(!isSelf && peerInfo.userData.type !== 'phone') {
             peers.push(peerId);
             updatePeerInfo();
         }
     });
 
-    skyway.on('peerLeft', function (peerId, stream, isSelf) {
+    skyway.on('peerLeft', function (peerId, peerInfo, isSelf) {
         if(!isSelf) {
             var npeers = [];
             for(peer in peers) {
