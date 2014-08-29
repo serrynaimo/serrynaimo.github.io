@@ -57,6 +57,7 @@ body {
 
 #video button:disabled {
     background: #888;
+    box-shadow: 1px 2px 1px #444;
 }
 
 #capturesCont {
