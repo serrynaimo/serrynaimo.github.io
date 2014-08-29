@@ -95,6 +95,10 @@ body {
     margin-right: 10px;
 }
 
+#preview {
+    transform: rotateY(-180deg);
+}
+
 #preview, #photo {
     width: 600px;
     margin: -200px -300px;
