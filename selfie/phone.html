@@ -99,12 +99,12 @@
                 $video.style.display = 'block';
             }, 2000);
 
-            $photo.toBlob(function(blob) {
-                skyway.sendBlobData(blob, {
-                    size: blob.size,
-                    name: (new Date()).toString()
-                }, peerId);
-            });
+            var blob = skyway._base64ToBlob($photo.toDataURL('image/jpeg', 0.8));
+
+            skyway.sendBlobData(blob, {
+                size: blob.size,
+                name: (new Date()).toString()
+            }, peerId);
         }
     });
 

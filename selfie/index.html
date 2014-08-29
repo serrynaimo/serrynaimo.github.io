@@ -116,9 +116,9 @@
 
     function capture() {
         if(!$btn.disabled) {
-            skyway.sendP2PMessage('/capture');
             $status.innerText = "Capturing...";
             $btn.disabled = true;
+            skyway.sendP2PMessage('/capture');
         }
     }
 
