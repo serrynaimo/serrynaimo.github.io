@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="http://www.facebook.com/2008/fbml"
+    itemscope itemtype="http://schema.org/WebPage">
+<head>
+    <meta charset="utf-16">
+    <title>Call another user</title>
+
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+    <section id="video">
+        <video id="myvideo" muted autoplay></video>
+    </section>
+    <section id="controls">
+        <input type="email" id="room" placeholder="Your eMail"/> <button onclick="joinRoom();">Join</button>
+        <input type="email" id="callee" placeholder="Callee eMail" /> <button onclick="call();">Call</button>
+    </section>
+    <section id="status">
+        Idle
+    </section>
+
+    <script type="text/javascript" src="http://cdn.temasys.com.sg/skyway/skywayjs/0.5.x/skyway.complete.min.js"></script>
+    <script type="text/javascript">
+
+    var skyway = new Skyway(),
+        $room = document.getElementById('room'),
+        $callee = document.getElementById('callee'),
+        $video = document.getElementById('video'),
+        $myvideo = document.getElementById('myvideo'),
+        $status = document.getElementById('status'),
+        inCall = false,
+        peers = 0;
+
+    skyway.on('incomingStream', function (peerId, stream, isSelf) {
+        if(isSelf) {
+            attachMediaStream($myvideo, stream);
+        }
+        else if(inCall) {
+            var vid = document.createElement('video');
+            vid.autoplay = true;
+            $video.appendChild(vid);
+            attachMediaStream(vid, stream);
+        }
+    });
+
+    skyway.on('peerJoined', function (peerId, peerInfo, isSelf) {
+        if(!inCall && !isSelf) {
+            skyway.joinRoom($room.value, {audio: true, video: true});
+            inCall = true;
+            peers++;
+        }
+        else if(isSelf) {
+            $status.textContent = 'Waiting - A/V: ' + (inCall ? 'on' : 'off') + ' Peers: ' + peers;
+        }
+    });
+
+    skyway.on('peerLeft', function (peerId, peerInfo, isSelf) {
+        if(peers > 1 && !isSelf) {
+            skyway.joinRoom($room.value, {audio: false, video: false});
+            inCall = false;
+        }
+        $status.textContent = 'Waiting - A/V: ' + (inCall ? 'on' : 'off') + ' Peers: ' + peers;
+        peers--;
+    });
+
+    skyway.on('readyStateChange', function(state) {
+        if(state === 0) {
+            $status.textContent = 'Idle';
+        }
+        else if(state === 1) {
+            $status.textContent = 'Connecting';
+        }
+        else if(state === 2) {
+            $status.textContent = 'Connected';
+        }
+    });
+
+    skyway.init('774b477f-dc20-4374-ba13-3eda09414c28');
+
+
+    function joinRoom() {
+        skyway.joinRoom($room.value, {audio: false, video: false});
+        inCall = false;
+    }
+
+    function call() {
+        skyway.joinRoom($room.value, {audio: true, video: true});
+        inCall = true;
+    }
+
+    </script>
+
+</body>
+</html>
